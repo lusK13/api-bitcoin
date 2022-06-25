@@ -1,0 +1,23 @@
+{
+  "name": "api-bitcoin",
+  "version": "1.0.0",
+  "description": "bitcoin price",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lusK13/api-bitcoin.git"
+  },
+  "author": "Lucas Lardot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lusK13/api-bitcoin/issues"
+  },
+  "homepage": "https://github.com/lusK13/api-bitcoin#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
