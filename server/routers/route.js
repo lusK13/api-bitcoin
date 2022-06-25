@@ -11,13 +11,4 @@ module.exports = (app)=>{
         (new Bitcoin).last24Hours(req,res);
 
     });
-
-    app.get('/test',async (req, res)=>{
-
-        const btsql = require('../src/services/BitcoinDb')()
-
-        btsql.autoAdd();
-        res.send('test')
-
-    })
 };
