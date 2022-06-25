@@ -52,6 +52,14 @@ class MysqlBitcoin {
             console.log(insert);
     }
 
+    async selectLast24Hours(){
+
+        let lastPrice = await this.connection.pquery('SELECT * FROM bitcoin_price WHERE date_time > DATE_SUB(NOW(),INTERVAL 24 HOUR) ');
+
+        console.log(lastPrice);
+
+    }
+
                
 };
 

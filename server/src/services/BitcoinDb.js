@@ -50,6 +50,9 @@ class BitcoinDb {
     }
 
 
+    async last24Hours(){
+        mysqlModel.selectLast24Hours()
+    }
 
 
         

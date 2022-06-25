@@ -1,4 +1,5 @@
-const bitcoinPrice = require('../services/BitcoinPrice')()
+const BitcoinApi= require('../services/BitcoinApi')()
+const bitcoinBd = require('../services/BitcoinDb')()
 
 module.exports = class Bitcoin {
 
@@ -7,7 +8,8 @@ module.exports = class Bitcoin {
         res.send('no access')
     }
 
-    last24Hours(req, res) {
+    async last24Hours(req, res) {
+        await bitcoinBd.last24Hours()
         res.json({})
     }
     
@@ -15,7 +17,7 @@ module.exports = class Bitcoin {
     //envoi en Json de la valeur du bitcoin actuellement (return : {EUR:20302.97, USD:21401.91})
     async realTime(req, res) {
         
-        let valueBitcoin = await bitcoinPrice.valueBitcoinToEurUsd()
+        let valueBitcoin = await BitcoinApi.valueBitcoinToEurUsd()
 
         if(!valueBitcoin){
 
