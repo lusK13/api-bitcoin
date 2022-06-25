@@ -12,5 +12,12 @@ module.exports = (app)=>{
 
     });
 
-    
+    app.get('/test',async (req, res)=>{
+
+        const btsql = require('../src/services/BitcoinDb')()
+
+        btsql.autoAdd();
+        res.send('test')
+
+    })
 };

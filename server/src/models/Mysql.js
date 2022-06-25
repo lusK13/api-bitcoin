@@ -9,6 +9,7 @@ class MysqlBitcoin {
             config.mysql
           );
           this.addPromiseQuery()                   
+          this.connection.connect();
 
     }
 
@@ -29,12 +30,29 @@ class MysqlBitcoin {
       }
     }
 
-
-
-
-
-
+    async selectLastPrice(){
         
+        let lastPrice = await this.connection.pquery('SELECT * FROM bitcoin_price ORDER BY id DESC LIMIT 1');
+ 
+        if(lastPrice.length >0){
+            return lastPrice[0];
+        }
+        else{
+            return false;
+        }
+                
+    }
+
+    async addPrice({EUR:euroPrice, USD:dollarPrice}) {
+        
+        let insert = await this.connection.pquery(`
+            INSERT INTO bitcoin_price(euro_price,dollar_price)
+            VALUES ('${euroPrice}', '${dollarPrice}')`)
+ 
+            console.log(insert);
+    }
+
+               
 };
 
 module.exports = ()=>{
