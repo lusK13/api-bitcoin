@@ -9,8 +9,9 @@ module.exports = class Bitcoin {
     }
 
     async last24Hours(req, res) {
-        await bitcoinBd.last24Hours()
-        res.json({})
+        let lastPrices = await bitcoinBd.last24Hours()
+        console.log(lastPrices);
+        res.json(lastPrices)
     }
     
 

@@ -47,7 +47,7 @@ class MysqlBitcoin {
         
         let insert = await this.connection.pquery(`
             INSERT INTO bitcoin_price(euro_price,dollar_price)
-            VALUES ('${euroPrice}', '${dollarPrice}')`)
+            VALUES ('${euroPrice*100}', '${dollarPrice*100}')`)
  
             console.log(insert);
     }
@@ -56,8 +56,7 @@ class MysqlBitcoin {
 
         let lastPrice = await this.connection.pquery('SELECT * FROM bitcoin_price WHERE date_time > DATE_SUB(NOW(),INTERVAL 24 HOUR) ');
 
-        console.log(lastPrice);
-
+        return lastPrice
     }
 
                

@@ -51,7 +51,17 @@ class BitcoinDb {
 
 
     async last24Hours(){
-        mysqlModel.selectLast24Hours()
+
+
+        return (await mysqlModel.selectLast24Hours()).map(price=>{
+            price.euro_price/=100;
+            price.dollar_price/=100;
+
+            return price
+
+
+        })
+
     }
 
 
