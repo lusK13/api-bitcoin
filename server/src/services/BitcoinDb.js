@@ -22,25 +22,34 @@ class BitcoinDb {
         
             let now = new Date();
             let lastPrice = (await mysqlModel.selectLastPrice()).date_time;
-            let lastPriceFive = new Date(lastPrice.getTime()+300000);
-            
-            let diffTime = lastPriceFive-now.getTime();
-    
-            console.log(diffTime);
-    
-            if(diffTime<=0){
-                let bitcoinPrice = await BitcoinApi.valueBitcoinToEurUsd()
-                mysqlModel.addPrice(bitcoinPrice)
-                setTimeout(() => {
-                    this.addNewPrice();
-                }, 300000+diffTime);
-                
+            if(lastPrice){
+
+                let lastPriceFive = new Date(lastPrice.getTime()+300000);
+                let diffTime = lastPriceFive-now.getTime();
+
+                if(diffTime<=0){
+                    let bitcoinPrice = await BitcoinApi.valueBitcoinToEurUsd()
+                    mysqlModel.addPrice(bitcoinPrice)
+                    setTimeout(() => {
+                        this.addNewPrice();
+                    }, 300000+diffTime);
+                    
+                }
+                else{
+                    setTimeout(() => {
+                        this.addNewPrice();
+                    }, diffTime);
+                }
             }
             else{
-                setTimeout(() => {
-                    this.addNewPrice();
-                }, diffTime);
+                let bitcoinPrice = await BitcoinApi.valueBitcoinToEurUsd()
+                mysqlModel.addPrice(bitcoinPrice)
+
+
             }
+            
+    
+            
         
 
 
